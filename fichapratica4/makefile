@@ -2,13 +2,10 @@
 
 OBJS = main.o string_utils.o
 CFLAGS = -std=c11 -Wall -Wextra -g
-PROG = vowels_v2
 
-all:$(PROG)
-	echo a var CC tem $(CC)
 
-$(PROG):$(OBJS)
-	$(CC) -o $(PROG) $(OBJS)
+vowels_v:$(OBJS)
+	$(CC) -o $@ $^
 
 main.o:main.c 
 	$(CC) $(CFLAGS) -c main.c
