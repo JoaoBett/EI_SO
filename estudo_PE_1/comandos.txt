@@ -1,0 +1,71 @@
+cd [ABC] - mudar de directorio
+
+cd .. - voltar no directorio
+
+ls - saber os ficheiros que tão no directorio local
+
+id - visualizar a informação do utilizador corrente
+
+ifconfig - saber o IP do PC
+
+date - visualizar o dia da semana-dia-mes-ano-hora corrente do servidor
+
+ps - ver a lista de comandos
+
+clear - limpar o ecra
+
+history - ver o histórico de comandos
+
+cat- mostra o que está dentro de um arquivo
+
+sudo - comando para 'modo priveligiado'
+
+adduser - adicionar utilizador
+
+> 1> - redireccionamento do stdout
+
+2> - redireccionamento do stderr
+
+| - pipe para fazer varios processos ao mesmo tempo
+
+man - manual
+
+pwd - directoria corrente
+
+mkdir - fazer uma pasta
+
+touch - fazer um ficheiros
+
+rm - remover um ficheiro ou pasta
+
+cp - copiar um ficheiro ou pasta
+
+mv - mover pastas
+
+chmod - alterar premissões
+
+whoami - identificação do utilizador
+
+find - [caminho] [expressao]
+
+wc - word count
+
+cut - cortar partes da linha
+    cut -f1 -d: /etc/passwd
+
+paste - colar 2 linhas
+
+tr - translate 
+    tr 'a' 'A' - transforma os a em a
+
+grep - sinaliza todas as palavras
+
+^ - para sacar o inicio da frase
+
+$ - para sacar o final da frase
+
+base64 - colocar o ficheiro em base64
+
+wget - permite acesso a conteudos online e descarrega-os
+
+curl - é o wget mas para o que ele n der 
