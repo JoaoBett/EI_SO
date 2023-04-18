@@ -1,0 +1,14 @@
+$(comando) - execução do comando 
+
+file - devolve a informação do tipo do ficheiro
+
+set -u - leva ao término do programa se existir uma variavel sem um valor atribuido
+
+base64 (nomedoficheiro.abc) > (novonomedoficheiro.base64) - colocar um ficheiro em base64
+
+mkdir $(date +%Y.%m.%d) - colocar uma pasta com o titulo da data em que +%Y... sao os parametros para colocar pela ordem desejada
+
+gcc -c (nomedoficheiro.c) - compila e cria o ficheiro
+
+gcc -o olamundo (olamundo.c) - compila e cria um executavel .o
+
