@@ -1,7 +1,7 @@
 # EI_SO #
 
 ### Introduction ###
->This repository contains Top 50 Linux Commands You Must Know as a Regular User 🐧.
+>This repository contains Top 50 Linux Commands.
 
 ##### Commands #####
 
