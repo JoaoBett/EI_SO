@@ -1,0 +1,12 @@
+#args.ggo
+# Ficheiro de configuração do programa SO
+
+purpose "Solucao exrcicio2 conta letras"
+package "SO"
+version "1.0"
+
+# Options
+
+option "string"  s "Texto onde queremos pesquisar a letra" string yes
+
+options "letra" l   "Letra para pesquisar na string "     string yes
