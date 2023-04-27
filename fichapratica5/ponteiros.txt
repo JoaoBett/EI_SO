@@ -1,0 +1,24 @@
+
+int A = 3; --> valor da variavel A = 3
+
+int* PTR; --> declaração de um ponteiro
+
+PTR = &A; --> a variavel PTR aponta para o valor 3 armazenado em A 
+
+-----------------------------Diferente de ------------------------
+
+int A = 3; --> valor da variavel A = 3
+
+int* PTR; --> declaração de um ponteiro
+
+*PTR = &A --> o ponteiro PTR aponta para o endereço de memória do A
+
+
+
+Printf(%p, PTR) --> da print no endereço de memoria do ponteiro
+
+
+
+int* P[5];---> Ficou no CPU
+
+int* P; Malloc(...);---> Ficou na RAM
