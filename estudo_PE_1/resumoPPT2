@@ -1,0 +1,78 @@
+Sistema operativo é um software que controla a execução das aplicações
+
+Principais objetivos:
+    -Conveniência
+    -Eficiencia
+    -Capacidade de Evoluir
+
+
+Serviços de um SO:
+    -Desenvolvimento de aplicações
+    -Execução de programas
+    -Acesso a dispositivos E/S e acesso a ficheiros
+    -Acesso ao sistema
+    -Deteção de erros
+    -Contabilização de uso
+
+Classes de utilizadores:
+    -Utilizador de apps
+        -SO facil de usar e aprender
+        -SO que adapte o utilizador
+        -Resposta rapida
+        -Sem surpresas
+    -Programador de apps
+        -Acesso facil a chamadas de baixo nivel
+        -Visao consistente do sistema
+        -Uso facil de serviços
+        -Portabilidade de outras plataformas
+    -Programador de sistemas
+        -Desenvolve software
+        -SO deve possibilitar:
+            -facil criacao de prog
+            -facil depuracao
+            -facil manutencao
+            -facil alteraçao/expansao
+            -facil avaliação de desempenho
+    -Administrador de sistemas
+        -SO deve possibilitar:
+            -Facil acrescimo/remocao de dispositivos
+            -Segurança
+            -facil atualizacao
+            -Facil gestao
+            -Eficiente
+
+Tipos de SO:
+    -Mono utilizador
+        -Processo de cada vez
+        -primordios 
+    -Multitarefa
+        -Execucao de varias apps simultaneamente
+        -Capacidade de comutacao de tarefas
+    -Nao interativo
+        -Batch
+        -Alto desempenho = caro
+        -Tarefas autonomas
+        -Tarefas em Lote(batch)
+    -Multiutilizador
+        -Uso de varios utilizadores ao mesmo tempo
+    -Tempo real
+        -Latencia
+            -Hard realtime - tempo preciso
+            -firm realtime - tolerado atraso
+            -soft realtime - num intervalo de tempo
+    -Virtualizado
+        -Ex: em veiculos
+
+Sistemas SCADA - Supervisory Control and Data Acquisition
+
+Maquinas virtuais:
+    -Similitude
+    -Eficiencia
+    -Gestao de recursos
+
+    -SO Hospedeiro
+    -SO Hospede
+
+
+
+Containers são do género de maquinas virtuais que servem rodar varias aplicações que possam ter conflitos entre si
