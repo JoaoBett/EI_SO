@@ -1,0 +1,55 @@
+Mercado OS:
+-Android - 43.01%
+-Windows - 29.18%
+-ioS - 17.24%
+-os X - 6.03%
+-unkown - 2.15%
+-linux - 1.15%
+
+bug - an unexpected defect, fault, flaw or imperfection
+
+Firmware - é o software que controla o dispositivo
+         -software que existe no próprio dispositivo
+         -passivel de ser atualizado
+
+BIOS - Basic Input/Output System
+     -Interface para Firmware
+
+Sistema Operativo   - Virtualiza o processador
+                    - Virtualiza a memória
+                    - Disponibiliza serviços aos processos sob a forma de chamadas ao Sistema
+
+
+CheckM8 - Falha iOS bootrom
+        - A bootrom não pode ser corrigida
+
+
+OS  - Permite o uso simples dos recursos de um sistema informatico
+    - Disponibiliza serviços
+    - Gestão de memoria secundaria(virtual)
+    - Interage com o hardware
+
+CPU - Controla as operações de um computador
+
+Memória Principal - Armazena os dados e as instruções dos programas
+                  - Tempo de acesso
+                        -de 80 a 90 ns (memoria dinamica)
+                        -de 10 a 15 ns (memoria estatica)
+
+
+Memória Secundária - memória persistente
+                   - HDD/SSD
+
+Mecanismo de interrupções - Interno
+                                -Erro - erro de memoria/sobreaquecimento do sistema
+                                -Temporizador
+                            
+                            -Externo
+                                -Teclado
+                                -Rato
+                                -Placa de Rede
+                                -Controlador de disco
+
+                            Esperar pelos dispositivos leva o CPU a desperdiçar preciosos ciclos de relógio
+
+                            
