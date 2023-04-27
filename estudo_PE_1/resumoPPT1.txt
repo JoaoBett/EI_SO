@@ -53,3 +53,22 @@ Mecanismo de interrupções - Interno
                             Esperar pelos dispositivos leva o CPU a desperdiçar preciosos ciclos de relógio
 
                             
+
+E/S - Módulo de E/S executa a operação solicitada
+    - CPU verifica periodicamente para ver se ta complete
+    
+    programado:
+        -Nivel de desempenho do sistema pode baixar
+        -Depende da analise periodicamente
+    
+    através de interrupções:
+        -Melhor que o programado
+        -exige hardware com suporte para interrupçoes
+
+    Via DMA(Direct Memory Access):
+        -Dados a transferir para o dispositivo lidos/escritos diretamente
+        -Requer existencia do controlador de DMA
+        -apenas intervem no inicio da operação
+        -Requer suporte de DMA
+        -Apenas se justifica para dispositivos que manipulam elevados volumes de dados
+        
