@@ -1,0 +1,81 @@
+Linguagem C:
+
+2 Classes:
+Ficheiros a cargo do programador
+    -Codigo fonte - .c 
+    -Header - .h
+
+Ficheiros criados do compilador
+    -Objeto - .o 
+    -executavel - .exe 
+
+bibliotecas
+    -libs 
+
+------------------------------------------------------------------------------------
+
+Ficheiros sáo pre processdados
+
+gcc -e fich.c
+-efetua pre processamento
+
+gcc -s fich.C
+-cria ficheiro em assembly
+
+gcc -c fich.C
+-cria o ficheiro .o 
+
+
+------------------------------------------------------------------------------------a
+
+Preprocessador
+
+- programa que processa os ficheiros do codigo fonte
+
+- executado antes da fase de compilaçao
+------------------------------------------------------------------------------------
+
+assert
+
+-validar o codigo
+-auxiliar o programador a detetar situaçoes erradas na app
+
+-nao deve ser mantida em codigo de producao
+
+-utilizar durante a compilacao
+
+------------------------------------------------------------------------------------
+
+static_assert vs assert
+
+-avaliada durante a compilacao      -durante a execução
+
+-requer compilador que suporte a norma C11  -macro definida em <assert.h>
+
+------------------------------------------------------------------------------------
+
+Utilitario make
+
+-recomendado que uma app seja dividia em varios ficheiros codigo fonte
+
+-contem:
+    -estrutura do projeto
+    -ficheiros e dependencias
+    -instruçoes para a compilaçao do programa~
+
+-o  make gera dependecias entre ficheiros
+
+-serve maioritariamente para autommatizar a determinaçao de dependencias
+
+------------------------------------------------------------------------------------
+
+gengetop - criar automaticamente o codigo fonte
+
+doxygen - documentacao
+
+ident - identaçao
+
+pmccabe - complexidade do codigo
+
+cppcheck - deteção de anomalias
+
