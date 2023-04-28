@@ -1,0 +1,190 @@
+Programa - ficheiro executável
+
+Processo - programa em execução
+         - Varios processos podem estar a correr no mesmo Programa
+
+top (linux) - mostra quantos processos, uptime, carga media do sistema
+
+ficheiro proc/stat - mantem estatisticas sobre a atividade do sistema
+---------------------------------------------------------------------------------------------------------
+Qual o significado dos diretórios cujo nome contém apenas dígitos existentes no diretório /proc?
+
+R: Os diretorios no /proc que apenas tem digitios sao geralmente correspondetes a processos em Execucao
+Cada ID de cada processo é nomeado de "PID"...
+Contem os status do processo atual - uso de memoria
+                                   - informaçoes sobre arquivos abertos pelo processo
+---------------------------------------------------------------------------------------------------------
+O que faz o utilitário watch? (sugestão: “man watch”)4
+
+R:O utilitário watch permite executar um comando de forma repetida em intervalos regulares de tempo e exibir a saida do comando na tolerado
+
+Nota: Utilitário - software projetado para realizar uma tarefa especifica relacionada com o SO ou com uma apps
+---------------------------------------------------------------------------------------------------------
+Instale o “tldr” (sudo apt install tldr) e execute “tldr watch”
+
+R:O tldr permite fornecer a documentação simplificada sobre os coamndos
+---------------------------------------------------------------
+
+Kernel:
+
+-Conjunto de software que é responsavel pela interação com a maquina
+
+Distribuição
+
+-Conjunto de software que forma um SO
+Exmp: Lubuntu, oracle,gentoo, red hat...
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Elementos essenciais num processo:
+
+- Código do programa
+
+- Dados associados ao processo
+
+Exemplos Caracterizadores de um processo:
+
+-PID
+-User PID
+-Prioridade
+-Estado
+-Registos da CPU
+-Memoria em uso
+-Informaçao sobre operaçoes I/o
+-Contador do programa
+
+------------------------------------------------------------------------------------
+
+Process Control Block - PCB
+
+-Estrutura de dados que mantem varios elementos do processo
+
+-PCB é criado e mantido pelo SO
+
+-PCB é essencial para sistemas multitarefas
+
+---------------------------------------------------------------
+
+Comutação de processos:
+
+SO multitarefa - comuta os processos pelo CPU
+
+PCBs têm filas de espera "queues"
+    -Consoante o estado migram de uma fila para outra
+    -Podem ser:
+        -Prontos - para serem executados
+        -Em espera - "Bloqueados"
+
+Tabelas de um SO:
+    -Memoria
+    -Dispositivos
+    -Ficheiros
+    -processos
+        -Segmentos de um processo:
+            -Texto
+            -Dados
+            -Heap
+            -stack
+
+Cada processo tem o seu espaço de enderaçamento na memoria - endereçamento virtual
+
+So pode ter entre 32 a 64 bits
+
+------------------------------------------------------------------------------------------
+
+Qual a utilidade desse comando? (help ulimit)
+
+R:O comando "ulimit" permite visualizar e definir limites de recursos do sistema para o usuário atual ou para um especifico
+
+-------------------------------------------------------------------------------------
+O “ulimit” tem uma opção para consultar/alterar o tamanho máximo da stack. Qual é a opção?
+
+R:-s
+
+-------------------------------------------------------------------------------------
+
+Imagem do processo em UNIX
+
+-Imagem do processo
+
+-Segmento "text"
+    -Codigo dos processos
+    -read only
+
+-Segmento "data"
+    -variaveis
+        -globais
+        -estaticas
+
+-Segmento "heap"
+    -zona da memoria dinamica
+
+-Segmento "stack"
+    -zona das variaveis locais
+    -cada espaço - stack frame
+    -chamada uma função - call stack
+    -permite recursividade
+    -stack overflow - exceder o espaço da pilha
+
+Segmentation fault:
+
+-Deteção de tentativa de acesso de um processo a um espaço de memoria que nao lhe pertence
+
+-so crasha o programa
+
+
+
+------------------------------------------------------------------------------------
+
+Ficheiro executavel
+
+-contem dados necessarios a criacao do processo que executa
+
+BSS - Block Started by Symbol
+
+ELF - Executable and linkable Format
+
+------------------------------------------------------------------------------------
+
+Estados de um processo
+
+New - Ready - Running - "Waiting - Ready - Running" - Terminated
+
+------------------------------------------------------------------------------------
+
+Tipos de processos
+
+-Processo
+    -Depedente de E/S ("I/O Bound")
+        -Muitas operações e pouca computacao
+    -Dependente de CPU("CPU Bound")
+        -Pura computação
+        -velocidade dependente do CPU
+
+------------------------------------------------------------------------------------
+
+find vs. locate, quem consome mais
+E/S (acesso ao disco)?
+
+R: Locate consome menos mas é menos precisa
+
+------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
