@@ -1,0 +1,77 @@
+Ponteiros na linguagem C
+
+Mecanismo para a manipulacao direta de memoria
+
+contem o endereço de memoria onde se encontra um determinado dado ou estrutura
+
+Ponteiro tem sempre espaço reservado
+
+------------------------------------------------------------------------------------
+
+Formato Hexadecimal
+
+-rapida conversão de hexadecimal de e para binario
+
+-constantes em hexadecimal iniciam-se por 0x
+
+-guarda endereços de memoria
+
+-o ponteiro so pode apontar para variaveis do mesmo Tipos
+    -exececao do void que precisa de Caracterizadores
+
+------------------------------------------------------------------------------------
+
+int main(int argv, char argc){
+    int A = 20;
+    int *ptr;
+
+    ptr = &A;
+
+    *ptr = ptr*2;
+
+    printf("A variavel A tem o valor %d",*ptr);
+
+    return 0;
+}
+
+------------------------------------------------------------------------------------
+
+String
+
+-vetor de Caracteres 
+
+-o nome de uma variavel string é um ponteiro para o 1º elementos
+
+-char var_c = 'a' - guarda o valor do codigo ASCII da letra 'a'
+
+------------------------------------------------------------------------------------
+
+vetor de Ponteiros
+
+-um ponteiro assosiaco a um tipo de dados
+
+
+------------------------------------------------------------------------------------
+
+memoria dinamica 
+
+-associado à secção "heap"
+
+------------------------------------------------------------------------------------
+
+VLA (Variable Lenght Array)
+
+------------------------------------------------------------------------------------
+
+Erros frequentes
+
+-Copia incorreta devido a falta de capacidade
+
+-Escrita alem da memoria
+
+-Erros de omissao de termino de string
+
+-truncagem
+
+-"use-after-free" - usar um valor dps de ter sido retirado da stack ou seja tenha sido "free"
+
