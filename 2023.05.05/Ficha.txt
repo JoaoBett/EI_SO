@@ -1,0 +1,51 @@
+ls -al ---> todas as coias
+
+Exercicio 3.2
+
+-uname -a ---> diz o nome da maquina (-a serve para dizer tudo (all))
+
+Exercicio 3.5
+
+x ---> aparece tudo
+
+Exercicio 3.8
+
+sudo apt install tree
+
+sudo apt install curl
+
+sudo apt install dos2unix
+
+Exercicio 5.1
+
+date > date.txt
+
+Exercicio 6.1
+
+ps -ef | wc -l ---> conta os processos a decorrer e conta o numero de linhas
+
+ps -ef |& wc -l ---> conta e coloca em stderr e stdin o número de processos ativos
+
+Exercicio 7.2.5
+
+ls -al ---> os que são diretoria têm 'd' -- o proprietario e grupo do prorietario ta na frente
+
+Exercicio 8.2
+
+ls man 
+
+man man
+
+Exercicio 8.5
+
+whatis ---> diz o que é o comando
+
+apropos ---> diz o nome do processo/comando e a sua descrição
+
+whereis ---> diz onde ta o comando q procuramos
+
+which ---> diz onde esta o comando
+
+Exercicio 8.7
+
+man printf ---> diz os manuais

@@ -1,0 +1,18 @@
+package "Example of .ggo file"
+version "1.0"
+purpose "Matrix multiplication"
+
+
+#option "folder" f "folder" string typestr="dirname" required
+
+# Optional
+#option "num" n "number" int optional
+
+
+option "m1r" - "Number of rows in Matrix 1"     int yes
+
+option "m1c" - "Number of columns in Matrix 1"  int yes
+
+option "m2r" - "Number of rows in Matrix 2"     int yes
+
+option "m2c" - "Number of columns in Matrix 2"  int yes
