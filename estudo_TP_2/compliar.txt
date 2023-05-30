@@ -1,0 +1,1 @@
+gcc -o programa main.c funcoes.c funcoes_aux.c -lm ---> "lm" para incluir a biblioteca "<math.h>"

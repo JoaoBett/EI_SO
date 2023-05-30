@@ -1,0 +1,3 @@
+gcc -c [nome do arquivo.c] ---> cria o ficheiro .o (ficheiro objeto)
+
+gcc -o [nome do executavel] [nome do arquivo.o] ---> compila e cria o executavel
