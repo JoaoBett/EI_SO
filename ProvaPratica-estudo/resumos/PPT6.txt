@@ -1,0 +1,63 @@
+###API BAIXO NIVEL###
+
+##API BAIXO NIVEL##
+-open, close, read, write
+-mapeiam diretamente **chamadas ao sistema**
+-Bufferização do kernel
+
+##API ALTO NIVEL##
+-fopen,  fclocse, fprintf
+-Bufferização do user space
+
+#Chamadas ao Sistema#
+-Forma como o SO disponibiliza serviços ao sistema
+    -Serviços:
+        -Abertura e manipulaçao de ficheiros
+        -Estabelecimentos de ligações à rede
+
+#Ficheiro#
+-Organizar e manter dados em memória
+-Conjunto de 0s e 1s
+    -Pipes
+        -Comunição entre 2 processos
+    -Socket
+        -comunicação de rede acessivel através de descritores
+    
+#E/S Baixo Nivel#
+-Funcao open
+    -Apenas empregue com a flag O_CREAT
+        -Funçao para a criação de ficheiros int creat(...)
+    -Indica permissões
+
+#Descritor#
+-Indice da tabela de descritores abertos do ficheiro
+    -stdin, stdout,stderr
+
+#Funçao Read#
+-Erro = -1
+-Fim do ficheiro = 0
+-Sucesso = numero de octetos lidos para o buff
+
+#Funçao Write#
+-Valor positivo = OK(numero de octetos lidos)
+-Valor negativo = -1
+-Apenas faz a escrita quando:
+    -buffer é que faz a escrita ou buffer atua como memoria
+
+#Errno e Seek#
+-Errno é uma variável que é ativada quando há um Errno
+    --1 em muitas funçoões ou NULL para a maior parte das funçoes do libc
+    -EACCESS - Permission denied
+    -ENFILE - too many opened files in system
+-Seek
+    -permite manipular a posição de leitura ou escrita em um arquivo
+
+#close, unlink, rename e rmdir#
+-close
+    -fecha o ficheiro
+-unlink
+    -remover ficheiro
+-rename rmdir
+    -mover um ficheiro
+    -apagar um diretorio
+

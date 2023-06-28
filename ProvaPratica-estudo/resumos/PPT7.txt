@@ -1,0 +1,20 @@
+###API DE ALTO NIVEL###
+-Designação anglo-saxonica: User buffered I/O e standard I/o
+-Disponbilizada pelo STDIO (Standard Input/Output)
+-fwrite, fclose, fprintf
+
+#FILE *#
+-FILE * 
+    -stream(fluxo/canal)
+    -r:leitura
+    -r+:leitura e escrita
+    -w:escrita
+    -w+:escrita e leitura
+    -a:escrita em modo acréscimo 
+    -a+:leitura e escrita no final do ficheiro
+
+#Funções de leitura#
+- Leitura de um caractere: fgetc e ungetc
+– Leitura de uma linha: fgets
+– Leitura de dados binários: fread
+– Leitura de dados formatados: fscanf
