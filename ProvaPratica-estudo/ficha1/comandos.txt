@@ -1,0 +1,10 @@
+ls -> listar os ficheiros (-a listar todos até os oculos; -l listar mais informaçoes)
+
+id ->id corrente do utilizador
+
+date -> indica a data
+
+ps -> processos a decorrer
+
+clear -> limpar o ecra
+
