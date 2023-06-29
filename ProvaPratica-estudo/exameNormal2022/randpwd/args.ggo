@@ -1,0 +1,16 @@
+package "Example of .ggo file"
+version "1.0"
+purpose "Simple example (optional)"
+description "description needed (optional)"
+versiontext "versiontext needed (optional)"
+
+#----------------------------
+# independent options
+#----------------------------
+# Mandatory option
+#option "folder" f "folder" string typestr="dirname" required
+
+option "input"  i "Caminho para um dos ficheiros virtuais /dev/random(1) /dev/unrandom(2)" int    required
+option "output" o "Caminho para o ficheiro de saída"                                       string required
+option "lenght" l "Valor inteiro para o tamanho da palavra-passe"                          int    required
+
