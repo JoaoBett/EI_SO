@@ -1,0 +1,22 @@
+###METADADOS E FUNCOES STAT###
+
+#Ficheiros#
+-Dados
+    -elementos do ficheiro
+-Metadados
+    -dados associados às caracteristicas do ficheiro
+    -obter através da funçao STAT
+
+#Diretorios#
+-Lista de nome de ficheiros e Diretorios
+    -cada nome é mapeado para um inode number
+        -inode -> elemento do sistema de ficheiros
+-Sistemas de ficheiros (ext2, ext3, ext4)
+    -limite de 255 octoteos
+    -caminho para um destes ficheiros pode ter no maximo 4096 octoteos
+-getcwd - diretorio corrente
+-mkdir - criar diretorio
+-rmdir - remover diretorio
+
+#Iterar diretorios#
+-opendir, readdir e closedir -> funções para iterar contuedo do diretorio
