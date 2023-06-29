@@ -1,0 +1,78 @@
+###MEMORIA VIRTUAL###
+
+-Uso do disco para estender a memória RAM
+-VM protege
+-Cada processo tem um espaço de endereçamento linear
+-Memória Virtual + paginação
+
+#Memory management Unit#
+-MMU
+    -Através da tabela de páginas 
+    -Através da TLB(Translation lookaside Buffer)
+
+-Swapping 
+    -Swap out
+        -transferidas para a memoria persistente
+    -Swap in
+        -operação inversa ao swap out
+
+
+#Traduçao de endereços#
+-Offset de páginas
+    -numa pagina de 4096 octetos o offset está no intervalo [0,4095]
+    -2^12 = 4096
+
+-Descritor de página
+    -if(valid bit = 1) then -> página em memoria
+    -if(valid bit = 0) then -> página nao esta na ram (Page fault)
+
+-Exercicio
+    Qual é o valor de N e de P?
+    – 32 bits = 232 bytes, i.e., N+P=32
+    – 2
+    22 páginas = 22 bits necessários para indexar a página
+    ▪ N=22
+    – Endereço = 32 bits  N+P=32  P=32-22 = 10 bits
+    ✓Resposta
+    – N=22 bits, P=10 bits. Tamanho página=2^10=1KiB
+
+#TLB#
+-Cache de pequenas dimensões
+-Salvaguarda mapeamento endereços virtuais para endereços fisicos
+
+-coreinfo -> mostra dados do CPU e da memória
+
+#Pages faults#
+-Três tipos de pages faults
+    -invalid fault
+    -hard page fault
+    -soft page fault
+
+#Alocação de páginas#
+–Paginação hierárquica
+    – O nível raiz da tabela da página deve estar sempre na
+    RAM
+    – Os outros níveis podem ser paginados
+–Tabela associative de páginas (hash)
+    -Baseado no conceito de tabelas de hash
+    -Uma função de hash é usada para calcular um ID de hash
+–Tabela de páginas invertidas
+    -Reduz o espaço de memória dedicado à tabela de páginas
+    -Aumenta o tempo de busca de localização da pagina
+
+#Linux OS#
+-32 bits para endereçamento 4GiB (2^32 = 4GIB)
+-Linux divide o espaço de endereço em dois
+-Endereço do utilizador
+    -3GIB: de 0 a 3 GIB
+-Endereço do kernel
+    -1GIB: do 3º ao 4º GIB
+
+
+#Memory map#
+✓mmap: memory map
+– Mapear arquivos ou dispositivos na memória
+– Permite aceder a um arquivo ou dispositivo da mesma forma que se processa o acesso a memória
+    - Aceder a um arquivo mapeado na memória é como aceder a um vetor
+– API “map” assenta em memória virtual
+
