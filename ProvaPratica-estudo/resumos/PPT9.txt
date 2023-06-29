@@ -1,0 +1,99 @@
+###SISTEMAS DE FICHEIROS###
+
+#Unidades de armazenamento#
+-Unidades BI
+    -usadas pelo SO e outro software (KiB, MiB, Gib, etc)
+-Unidades SI
+    -usadas por vendedores de dispositivos de armazenamento
+
+#Sistema de ficheiros#
+-Dispotivo de armazenamento
+    -HDD, SDD, Stick USB, etc
+
+#Particionamento do Disco#
+-Bootup no PC
+    -Localizar os dispositivos de boot
+    -Localizar as partiçoes em cada um dos dispositivos de armazenamento
+    -Efetuar o mount de uma ou mais partes
+-Normas:
+    -Master Boot Record(MBR) - primeiros 512 octetos
+                             - maximo de 4 partiçoes 
+                             - 32 bits de endereçamento
+    
+    -GUID Partition Table(GPT) - substituto da BIOS
+                               - usa 64 bits para indicar setores
+
+#Sistema de Ficheiros: FAT#
+-Ficheiro em duas partes
+    -Ficheiro propriamente dito
+    -Metadados
+-File Allocation Table
+    -FAT16 -> 16 bits
+    -FAT32 -> 28 bits
+-Prós:
+    - Hierarquia de diretorios e ficheiros
+    - Ficheiro de tamanho variavel
+    - Metadados para ficheiros e diretorio
+-Contras:
+    -Limita o tamanho a 2TiB
+    -Localizar blocos livres requer iterar a lista de blocos da FAT
+    -Sujeita a fragmetação
+
+#Sistema de Ficheiros EXT#
+-FAT permite:
+    -Organização em Hierarquia de diretorios
+    -Armazenar ficheiros de tamanho variavel
+-FAT eficiência é baixa
+-inode: estrutura de dados empregues por muitos sistemas de ficheiros Unix
+    -guarda a localização no disco de
+-Prós:
+    -Otimizado para ficheiros pequenos
+    -Acesso mais rápido aos ficheiros
+    -Gestão mais rápida de blocos livres
+-Contras:
+    -baixa localidade: Não está otimizado para discos rigidos (HDD)
+
+#Sistema de Ficheiros: EXT#
+-extend file system
+    -problemas:
+        -ext tem reduzida localidade
+        -ext está sujeito a fragmentação
+    -ext2
+        -Prós:
+            -Todas as funcionalidades ext
+            -melhor desempenho
+        -Contras:
+            -Ficheiros de grandes dimensões podem estar em vários grupos de blocos
+            -Sistema de ficheiros mais complexos (aumenta possibilidade de corromper)
+
+    -ext3
+        -acrescenta consistencia e confiabilidade ao ext2
+
+-fsk
+    -utilitário
+    -Prós:
+        -Liberta o SF de se preocupar com a consistencia
+        -O SF fica mais simples
+    -Contras:
+        -Dificil de implentar
+        -lento
+
+-Journaling 
+    -Registar em log as ultimas
+    -Quando ocorre crash, uso do log para efetuar as operaçoes interrompidas 
+    -Uso de write-along log (WAL)
+    -Prós:
+        -Robusto, recuperação rápida do SF
+        -Implementação relativamente simples
+    -Contras:
+        -Aumento das escritas para disco
+        -Operaçoes de apagar não sao faceis de registar em journal
+    
+-ext4
+    -Prós:
+        -funcionalidades tipicas de SF
+        -Desempenho melhorado relativamente ao ext3
+        -suporte de escala para directorios
+    -Contras:
+        -ext4 melhoria incremental do ext3
+        -SF mais avançados assentam em COW(Copy-on-write)
