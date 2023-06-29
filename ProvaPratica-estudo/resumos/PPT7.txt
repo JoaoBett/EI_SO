@@ -18,3 +18,14 @@
 – Leitura de uma linha: fgets
 – Leitura de dados binários: fread
 – Leitura de dados formatados: fscanf
+
+#Funcoes de escrita#
+Três operações distintas, consoante a origem
+- Caractere - fputc
+- String – fputs, fprintf
+- Um bloco de dados binários - fwrite
+
+#Posicionamento de stream, flush e tratamento de erros#
+-Devolve:
+    -Sucesso = numero de octetos
+    -Erro = -1
