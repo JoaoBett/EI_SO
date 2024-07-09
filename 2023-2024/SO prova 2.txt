@@ -1,0 +1,517 @@
+API BAIXO NIVEL
+- opne close read write
+- manipulador do ficheiro - int
+- buffer no kernel, chamadas ao sistema
+
+OPEN
+- mapear o ficheiro indicado no sistema operativo
+	-> int open(const char *name, int flags, mode_t mode)
+		-> *name -> nome do ficheiro
+		-> flags -> forma e modo de abertura
+		-> mode -> apenas empregue para criar um ficheiro O_Creat
+			-> 0644 -> base octal -> 6 dono 4 group 4 outros
+int creat(const char *name, mode_t mode)
+	-> *name -> nome do ficheiro
+	-> mode -> modo do ficheiro
+
+open(filename, O_WRONLY(writeonly) | O_CREAT(create) | O_TRUNC (escrever por cima mesmo que já exista))
+ -> devolve valor inteiro -> -1 se erro
+			  -> 2 nao existe ficheiro
+		          -> 1 se tiver sucesso
+
+entradas
+	-> stdin
+	-> stdout	
+	-> stderr
+
+-------------------------------------------------------
+
+READ
+ssize_t read (int fd(descritor do ficheiro), void *buf(zona de memoria), size_t len (numero maximo de octetos que se pretende ler))
+
+devolve:
+	-> -1 quando da erro
+	-> 0 se estiver no fim do ficheiro
+	-> numero de octetos lidos (pode ser inferior ao parametro len)
+
+PONTEIRO DE FICHEIRO
+	-> posição corrente
+	-> operação leitura/escrita em relação ao ponteiro
+
+
+
+WRITE
+ssize_t read (int fd(descritor do ficheiro(open)), void *buf(zona de memoria), size_t count(numero de octetos para escrever))
+
+
+devolve
+	-> valor positivos(numero de octetos escritos) -> ok -> pode ser inferior ao numero de octetos pretendido
+	-> valor negativo -> erro -> -1
+	-> ssize_t é um size_t com sinal
+
+APPEND(acrescimo)
+open(filename, O_APPEND) 
+-> api sincroniza os processos
+-> escrita ocorre no final do ficheiro
+
+int fsync(int fd) -> buffers sao despejados para onde está o ficheiro
+
+-------------------------------------------------------
+
+ERRNO
+-> ta na biblioteca errno.h
+-> open close read write, ativam errno
+-> indica o que coreu mal
+	-> -1 em muitas funçoes
+	-> -1 ou NULL para a maior parte das funçoes de libc
+
+-> EACCES -> PREMISSION DENIED
+-> ENFILE -> TOO MANY OPEN FILES
+
+char *strerror(int errnum(valor do errno))
+-> colocar em string o erro
+
+-------------------------------------------------------
+
+LSEEK
+
+off_t lseek(int fd(descritor de ficheiro), off_t pos(entre 0 e o tamanho do ficheiro), int origin(origem))
+-> pos -> deslocamentos de octetos a ser aplicado
+-> origin
+	-> SEEK_CUR -> onde esta o ponteiro do ficheiro
+	-> SEEK_END -> onde termina o ficheiro
+	-> SEEK_SET -> posiçao absoluta que colocamos
+
+lseek(fd, SEEK_END, 20) -> POSICIONA A 20 OCTETOS DO FINAL
+
+SPARSE FILE -> criar um buraco entre ficheiros para poder escrever futuramente
+	
+-------------------------------------------------------
+
+CLOSE
+
+int close(int fd)
+
+int unlink(const char *pathname)
+
+int rename(const  char *oldpath, const char *newpath)
+
+int rmdir(const char *pathname)
+
+list open files -> lsof
+
+quase  tudo no unix é acedido através de um descritor
+
+-------------------------------------------------------
+
+API ALTO NIVEL
+- fopen fclose fprint
+- streams
+- FILE*
+- buffer no user space
+
+-buffer serve para suavizar escritas e leituras
+
+FICHEIRO
+- guardar informaçao e organizar
+- conjunto de 0s e 1s
+- unix  -> pipes entre dois processos (propria maquina)
+	-> dispositivos especiais (/dev)
+	-> sockets para comunicar entre processos (remoto)
+	-> /proc -> procurar ficheiros
+	-> lsof
+
+RAM e CPU o HDD e o SDD são muito lentos
+
+COPIA DE 2MiB
+
+a) 1024 octetos de cada vez 2^11=2048
+
+b)1 octeto de cada vez 2^21=2097152
+
+-------------------------------------------------------
+
+FILE *, fopen e fclose
+
+FILE * -> referencia uma stream -> canal
+
+obter stream -> fopen
+
+FILE *fopen(const char *path, const char *mode)
+	->r -> leitura
+	->w -> escrita
+	->a -> acrescentar
+
+retorna null -> caso erro
+-> devolve um ponteiro para o ficheiro -> caso sucesso
+
+texto vs binário (e.gg Windows)
+
+/n vs /r/n
+
+int fclose(FILE *stream)
+-> 0 se ok
+-> EOOF se erro
+
+int fcloseall(void)
+-> fecha tudo e só esta em GNU
+
+-------------------------------------------------------
+
+FGETC ler um caracter, UNGETC ler um caracter, FGETS ler uma linha, FREAD ler dados binarios, FSCANF dados formatados
+
+
+int fgetc (FILE *stream)
+-> retorna caractere lido
+-> EOF -> estiver no a)final do ficheiro ou b)erro
+
+a)existir erro na stream
+int ferror(File *stream)
+-> 0 se sucesso
+-> <0 se erro
+
+b)esta no fim do ficheiro
+int feof (FILE *stream)
+devolve :
+-> >0 se fim
+-> 0 caso contrario
+
+
+c) limpa o estado da stream
+void clearrer(FILE *stream)
+
+
+int ungetc(int c, FILE *stream)
+
+
+char *fgets(char *str, int size, FILE *stream)
+
+i)EOF
+ii)/n
+
+devolve: 
+-> str se não tem erros
+-> null se erro
+
+
+ssize _t geline(char **lineptr, size_t *n, FILE *stream)
+
+devolve 
+
+numero de caracteres lidos
+
+-1 se erro ou EOF
+
+
+ssize_t gedelim(char **lineptr, size_t *m, int delim, FILE *stream)
+serve para colocar uma coisa DELIM delimitar ate onde ler
+
+size_t fread(void *bf, size_t size, size_t nr, FILE *stream)
+devolve
+numero de elementos lidos
+
+se os elementos lids é menor que nr pode ser:
+EOF
+USAR O FERROR
+
+int fscanf(FILE *stream, const char *format,...)
+devolve 
+parametros liidos
+ou EOF caso erro
+
+int fputc(int c, FILE *stream)
+
+devolve 
+"c" se tudo ok
+EOF se erro
+
+int fputs (const char*str, FILE *stream)
+caso erro -> EOF
+
+in fprintf(FILE *stream, const char *format,...)
+
+size_t fwrite(void *buf, size_t size, size_t nr, FILE *stream)
+
+-------------------------------------------------------
+
+FSEEK
+
+int fseek(FILE *stream, long offset, int whence(referencial))
+
+void rewind(FILE *stream)
+
+long ftell(FIlE *stream)
+devolve 
+-> o posicionamento da stream
+-> -1 se ativa o errno caso erro
+
+int fflush(FILE *stream)
+devolve
+EOF se erro
+0 se tudo ok
+
+fsync -> esvaziar os buffers atravesde API de baixo nivel
+inf fileon(FILE *stream)
+
+-------------------------------------------------------
+
+TIPOS DE BUFFERING
+unbuffered -> stderr
+
+line-buffered -> até um \n -> stdout
+
+block-buffered -> as restantes streams
+
+int setvbuf(FILE *stream, char *buf, int mode, size_t size)
+
+int remove(const char *pathname)
+
+-------------------------------------------------------
+
+METADADOS E FUNÇOES STAT
+
+dados -> elements do ficheiro
+metadados -> dados associados com as características do ficheiro
+
+EXIF  - exchangeable image file format
+
+int stat(const char *path, struct stat *buf) -> caminho para o ficheiro
+int fstat(int fd, struct stat *buf) -> descritor de baixo nível para o ficheiro
+int lstat(const char *path, struct stat *buf) -> mesmo que stat, mas processa link simbolicos
+
+-------------------------------------------------------
+
+DIRETORIOS
+
+-contem lista de nomes de ficheiros e dirs
+
+ext2, ext3, ext4
+limite de 255 octetos -> são sistemas de ficheiros
+
+char *getcwd(char *buf, size_t size)
+devolve:
+null se erro
+"buf" se tudo off -> caminho completo até o diretório corrente
+
+int chdir(const char *path)
+intfchdir(int fd)
+devolve
+0 se sucesso
+-1 com ativação do errno
+
+int mkdir(const char *path, mode_t mode)
+devolve
+0 se tud ok
+-1 ativação do errno
+
+int rmdir(const char *path)
+devolve
+0 se tudo ok
+-1 ativaçao de errno
+
+
+-------------------------------------------------------
+
+OPENDIR READIR CLOSEDIR
+
+DIR *opendir(const char *name)
+
+struct dirent *readdir(DIR *dir)
+
+int closedir(DIR *dir)
+devolve
+0 se tudo ok
+-1 com ativação de errno
+
+-------------------------------------------------------
+
+UNIDADES DE ARMAZENAMENTO
+
+um octeto tem 8 bits
+
+kilobyte = 1KB = 1000 bytes -> sistema internacional (SI)
+	 = 2^10 = 1024 bytes
+
+2^21 = 2^20 + x 2^1 = 2MiB
+
+-------------------------------------------------------
+
+SISTEMAS DE FICHEIROS
+
+Particionamento e mounting
+-Normas:
+    -Master Boot Record(MBR) - primeiros 512 octetos
+                             - maximo de 4 partiçoes 
+                             - 32 bits de endereçamento
+    
+    -GUID Partition Table(GPT) - substituto da BIOS
+                               - usa 64 bits para indicar setores
+
+FAT -> FILE ALLOCTION TABLE
+ext1 -> inodes
+ext2 ->grupos de blocos
+ext3 -> journaling
+ext4 -> extensões e b-trees
+
+-Dispotivo de armazenamento
+    -HDD, SDD, Stick USB, etc
+
+
+
+-FAT permite:
+    -Organização em Hierarquia de diretorios
+    -Armazenar ficheiros de tamanho variavel
+-FAT eficiência é baixa
+-inode: estrutura de dados empregues por muitos sistemas de ficheiros Unix
+    -guarda a localização no disco de
+-Prós:
+    -Otimizado para ficheiros pequenos
+    -Acesso mais rápido aos ficheiros
+    -Gestão mais rápida de blocos livres
+-Contras:
+    -baixa localidade: Não está otimizado para discos rigidos (HDD)
+
+#Sistema de Ficheiros: EXT#
+-extend file system
+    -problemas:
+        -ext tem reduzida localidade
+        -ext está sujeito a fragmentação
+    -ext2
+        -Prós:
+            -Todas as funcionalidades ext
+            -melhor desempenho
+        -Contras:
+            -Ficheiros de grandes dimensões podem estar em vários grupos de blocos
+            -Sistema de ficheiros mais complexos (aumenta possibilidade de corromper)
+
+    -ext3
+        -acrescenta consistencia e confiabilidade ao ext2
+
+-fsk
+    -utilitário
+    -Prós:
+        -Liberta o SF de se preocupar com a consistencia
+        -O SF fica mais simples
+    -Contras:
+        -Dificil de implentar
+        -lento
+
+-Journaling 
+    -Registar em log as ultimas
+    -Quando ocorre crash, uso do log para efetuar as operaçoes interrompidas 
+    -Uso de write-along log (WAL)
+    -Prós:
+        -Robusto, recuperação rápida do SF
+        -Implementação relativamente simples
+    -Contras:
+        -Aumento das escritas para disco
+        -Operaçoes de apagar não sao faceis de registar em journal
+    
+-ext4
+    -Prós:
+        -funcionalidades tipicas de SF
+        -Desempenho melhorado relativamente ao ext3
+        -suporte de escala para directorios
+    -Contras:
+        -ext4 melhoria incremental do ext3
+        -SF mais avançados assentam em COW(Copy-on-write)
+
+-------------------------------------------------------
+
+###MEMORIA VIRTUAL###
+
+-Uso do disco para estender a memória RAM
+-VM protege
+-Cada processo tem um espaço de endereçamento linear
+-Memória Virtual + paginação
+
+#Memory management Unit#
+-MMU
+    -Através da tabela de páginas 
+    -Através da TLB(Translation lookaside Buffer)
+
+-Swapping 
+    -Swap out
+        -transferidas para a memoria persistente
+    -Swap in
+        -operação inversa ao swap out
+
+
+#Traduçao de endereços#
+-Offset de páginas
+    -numa pagina de 4096 octetos o offset está no intervalo [0,4095]
+    -2^12 = 4096
+
+-Descritor de página
+    -if(valid bit = 1) then -> página em memoria
+    -if(valid bit = 0) then -> página nao esta na ram (Page fault)
+
+-Exercicio
+    Qual é o valor de N e de P?
+    – 32 bits = 232 bytes, i.e., N+P=32
+    – 2
+    22 páginas = 22 bits necessários para indexar a página
+    ▪ N=22
+    – Endereço = 32 bits  N+P=32  P=32-22 = 10 bits
+    ✓Resposta
+    – N=22 bits, P=10 bits. Tamanho página=2^10=1KiB
+
+#TLB#
+-Cache de pequenas dimensões
+-Salvaguarda mapeamento endereços virtuais para endereços fisicos
+
+-coreinfo -> mostra dados do CPU e da memória
+
+#Pages faults#
+-Três tipos de pages faults
+    -invalid fault
+    -hard page fault
+    -soft page fault
+
+#Alocação de páginas#
+–Paginação hierárquica
+    – O nível raiz da tabela da página deve estar sempre na
+    RAM
+    – Os outros níveis podem ser paginados
+–Tabela associative de páginas (hash)
+    -Baseado no conceito de tabelas de hash
+    -Uma função de hash é usada para calcular um ID de hash
+–Tabela de páginas invertidas
+    -Reduz o espaço de memória dedicado à tabela de páginas
+    -Aumenta o tempo de busca de localização da pagina
+
+#Linux OS#
+-32 bits para endereçamento 4GiB (2^32 = 4GIB)
+-Linux divide o espaço de endereço em dois
+-Endereço do utilizador
+    -3GIB: de 0 a 3 GIB
+-Endereço do kernel
+    -1GIB: do 3º ao 4º GIB
+
+
+#Memory map#
+✓mmap: memory map
+– Mapear arquivos ou dispositivos na memória
+– Permite aceder a um arquivo ou dispositivo da mesma forma que se processa o acesso a memória
+    - Aceder a um arquivo mapeado na memória é como aceder a um vetor
+– API “map” assenta em memória virtual
+
+-------------------------------------------------------
+
+PROCESSOS
+
+
+pid_t fork()
+devolve 
+0 para o processo pai
+-1 se erro eativao o errno
+
+
+
+
+
+
+
+
+
+
